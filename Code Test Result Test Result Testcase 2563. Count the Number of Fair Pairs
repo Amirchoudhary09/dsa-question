@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int binaryUpper(vector<int>& v, int upper, int i) {
+        int ans = -1, l = i + 1, r = v.size() - 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (v[i] + v[mid] <= upper) {
+                ans = mid;
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    int binaryLower(vector<int>& v, int lower, int m, int i) {
+        int ans = -1, l = i + 1, r = m;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if (v[i] + v[mid] >= lower) {
+                ans = mid;
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    long long countFairPairs(vector<int>& nums, int lower, int upper) {
+        sort(nums.begin(), nums.end());
+        long long count = 0;
+
+        for (int i = 0; i < nums.size() - 1; i++) {
+            int k = binaryUpper(nums, upper, i);
+            int p = binaryLower(nums, lower, k, i);
+
+            if (k != -1 && p != -1) {
+                count += (k - p + 1);
+            }
+        }
+
+        return count;
+    }
+};
