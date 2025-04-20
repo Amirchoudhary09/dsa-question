@@ -1,0 +1,57 @@
+class Solution {
+public:
+    int n;
+     vector<int> ans;
+    /***-- difficult to manage  result vector---***/
+    //vector<int>result;
+    // void longest(vector<int>&nums,int i,int p){
+    //     if(i>=n){
+    //    if(result.size()<ans.size()){
+    //         result=ans;
+    //    }
+    //     }
+    //      
+    //     if(p==-1||nums[i]%nums[p]==0){
+    //         ans.push_back(nums[i]);
+    //         take=longest(nums,i+1,p);
+    //          ans.pop_back();
+           
+    //     }
+    //     int skip=longest(nums,i+1,p);
+             
+    // }
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        n = nums.size();
+        memset(dp,-1,sizeof(dp));
+       // dp.assign(n, -1);
+        sort(nums.begin(), nums.end());
+       // return result;
+
+        /****--- bottum up appraoch -----****/
+
+
+
+        // int index;
+        //int m = INT_MIN;
+        // vector<int> dp1(n,-1);
+        // vector<int> dp1;
+        // for (int i = 0; i < n; i++) {
+        //     for (int j = 0; j < i; j++) {
+        //         if (nums[i] % nums[j] == 0 && dp1[j] >= dp1[i]) {
+        //             dp1[i] = dp1[j] + 1;
+        //             dp[i] = j;
+        //         }
+        //     }
+        //     if (m < dp1[i]) {
+        //         index = i;
+        //         m = dp1[i];
+        //     }
+        // }
+        while (index != -1) {
+            ans.push_back(nums[index]);
+            index = dp[index];
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
